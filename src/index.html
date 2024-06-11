@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <title>Pomodoro Timer</title>
+</head>
+<body>
+
+<div class="absolute">
+    <div class="absolute inset-0 justify-center" id="shapes">
+        <div class="bg-shape1 bg-teal opacity-50 bg-blur"></div>
+        <div class="bg-shape2 bg-primary opacity-50 bg-blur"></div>
+        <div class="bg-shape3 bg-purple opacity-50 bg-blur"></div>
+    </div>
+
+    <div class="title">
+        <h2 id="second-title">POMODORO TIMER</h2>
+        <h2 id="first-title">POMODORO TIMER</h2>
+    </div>
+
+    <div class="timer-container">
+        <div class="timer-controls">
+            <div id="timer">25:00</div>
+            <div class="controls">
+                <button id="increase"><img id="up-arrow" src="resources/up-arrow.png" alt="Up"></button>
+                <button id="decrease"><img id="down-arrow" src="resources/down-arrow.png" alt="Down"></button>
+            </div>
+        </div>
+        
+        <div class="start-stop">
+            <button id="start">START</button>
+            <button id="reset">RESET</button>
+        </div>
+    </div>
+
+    <section id="slider">
+        <input type="radio" name="slider" id="s1" checked>
+        <input type="radio" name="slider" id="s2">
+        <input type="radio" name="slider" id="s3">
+    
+        <div class="container daily-container" for="s1" id="slide1">
+            <div id="daily-goal">Daily Goal</div>
+            <div id="progress-container">
+                <div id="circle">
+                    <div class="inner-circle">
+                        <div id="goal-number" style="display:block;">1</div>
+                        <input type="text" id="goal-input" maxlength="1" style="display:none;">
+                        <div id="goal-time">hour(s)</div>
+                        <button id="edit-goal"><img id="edit-img" src="resources/edit.ico" alt="Edit Goal"></button>
+                    </div>
+                </div>
+            </div>
+            <div id="completed">Completed: 0 mins</div>
+        </div>
+
+        <div class="container streak-container" for="s2" id="slide2">
+            <div>streak</div>
+        </div>
+
+        <div class="container settings-container" for="s3" id="slide3">
+            <div>settings</div>
+        </div>
+    </section>
+</div>
+<script src="index.js"></script>
+<script type="module" src="index.ts"></script>
+</body>
+</html>

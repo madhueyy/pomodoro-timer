@@ -1,0 +1,359 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
+
+html, body {
+    font-family: 'Inter';
+    margin: 0;
+    padding: 0;
+    background-color: #20126d;
+}
+
+.absolute {
+    position: absolute;
+    top: 50px !important;
+    inset: 0;
+    justify-content: center;
+    display: inline;
+    flex-direction: row;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.title {
+    font-family: "Poppins", sans-serif;
+    justify-content: center;
+	position: relative;
+    display: flex;
+    margin-bottom: 150px;
+}
+
+.title h2 {
+	color: #fff;
+	font-size: 80px;
+	position: absolute;
+    margin: 0;
+}
+
+.title #first-title {
+	color: transparent;
+	/* -webkit-text-stroke: 4px #ffffff; */
+}
+/* 
+.title #second-title {
+	color: #5680E9;
+	animation: animate 4s ease-in-out infinite;
+}
+
+@keyframes animate {
+	0%,
+	100% {
+		clip-path: polygon(
+			0% 45%,
+			16% 44%,
+			33% 50%,
+			54% 60%,
+			70% 61%,
+			84% 59%,
+			100% 52%,
+			100% 100%,
+			0% 100%
+		);
+	}
+
+	50% {
+		clip-path: polygon(
+			0% 60%,
+			15% 65%,
+			34% 66%,
+			51% 62%,
+			67% 50%,
+			84% 45%,
+			100% 46%,
+			100% 100%,
+			0% 100%
+		);
+	}
+} */
+
+/* h1 {
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 80px;
+    font-weight: 600;
+    margin: 0px;
+} */
+
+#shapes {
+    display: inline-flex;
+}
+
+.bg-shape1 {
+    width: 700px;
+    height: 700px;
+    border-radius:  9999px;
+    position: relative;
+    animation: one 10s infinite;
+}
+
+.bg-shape2 {
+    width: 500px;
+    height: 500px;
+    border-radius: 9999px;
+    position: relative;
+    animation: two 10s infinite;
+}
+
+.bg-shape3 {
+    width: 650px;
+    height: 650px;
+    border-radius: 9999px;
+    position: relative;
+    animation: two 10s infinite;
+}
+
+@keyframes one {
+    0%{left: 0px; top: 0px}
+    25%{left: 0px; top: 70px}
+    50%{left: 20px; top: 150px}
+    75%{left: 50px; top: 100px}
+    100%{left: 0px; top: 0px}
+}
+
+@keyframes two {
+    0%{left: 0px; top: 0px}
+    25%{left: 50px; top: 10px}
+    50%{left: 100px; top: 50px}
+    75%{left: 50px; top: 100px}
+    100%{left: 0px; top: 0px}
+}
+
+.opacity-50 {
+    opacity: .5;
+}
+
+.bg-blur {
+    filter: blur(90px);
+}
+
+.bg-primary {
+    background-color: #5680E9;
+}
+
+.bg-teal {
+    background-color: #5AB9EA;
+}
+
+.bg-purple {
+    background-color: #8860D0;
+}
+
+.timer-container {
+    position: relative;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.timer-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+#timer {
+    color: white;
+    font-size: 4em;
+    font-weight: 600;
+    margin-right: 10px;
+    background: linear-gradient(217deg, #5680E9, #8860D0);
+    padding: 15px 50px;
+    border-radius: 10px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+}
+
+#up-arrow {
+    width: 10px;
+    height: 10px;
+}
+
+#down-arrow {
+    width: 10px;
+    height: 10px;
+}
+
+.start-stop {
+    display: inline-block;
+}
+
+button {
+    border-radius: 2px;
+    background-color: white;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    transition: 0.4s;
+}
+
+button:hover {
+    opacity: 75%;
+    transition: 0.4s;
+}
+
+#start, #reset {
+    font-family: 'Inter';
+    font-weight: 600;
+    padding: 8px 16px;
+    background: linear-gradient(0.25turn, #5680E9, #5AB9EA);
+    color: white;
+    border-radius: 5px;
+    font-size: 30px;
+}
+
+#slider {
+    position: relative;
+    width: 50%;
+    height: 30vw;
+    margin: 80px auto;
+    perspective: 1400px;
+    transform-style: preserve-3d;
+}
+
+input[type=radio] {
+    position: relative;
+    top: 150%;
+    left: 40%;
+    width: 18px;
+    height: 18px;
+    margin-bottom: 15px;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+input[type=radio]:checked {
+    opacity: 1;
+}
+
+#slide1, #slide2, #slide3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    transition: transform 400ms ease;
+}
+
+/* Slider */
+#s1:checked ~ #slide1 {
+    transform: translate3d(0%, 0, 0px);
+}
+
+#s1:checked ~ #slide2 {
+    transform: translate3d(15%, 0, -100px);
+}
+
+#s1:checked ~ #slide3 {
+    transform: translate3d(-15%, 0, -100px);
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px 30px;
+    width: 300px;
+    height: 300px;
+    background-color: white;
+    text-align: center;
+    border-radius: 5%;
+}
+
+#daily-goal {
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+#progress-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    height: 200px;
+}
+
+#circle {
+    width: 200px;
+    height: 200px;
+    background: conic-gradient(#8860D0 0% 0%, #e0e0e0 0% 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-circle {
+    width: 80%;
+    height: 80%;
+    background: #ffffff;
+    border-radius: 50%;
+}
+
+#goal-number {
+    margin-top: 25px;
+    font-size: 50px;
+    font-weight: 500;
+}
+
+#goal-time {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.inner-circle:hover #goal-number,
+.inner-circle:hover #goal-time {
+    display: none;
+    transition: opacity 0.3s ease;
+}
+.inner-circle:hover #edit-goal {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+#edit-goal {
+    font-size: 20px;
+    font-weight: 400;
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    display: none;
+    transition: opacity 0.3s ease;
+}
+
+#edit-img {
+    width: 50px;
+}
+
+#goal-input {
+    margin-top: 25px;
+    width: 75px;
+    height: 100px;
+    transform: translate(50%, 0%);
+    font-size: 50px;
+    padding: 0;
+    border: 0;
+}
+
+#completed {
+    margin-top: 20px;
+    font-size: 17px;
+    font-weight: 300;
+}
