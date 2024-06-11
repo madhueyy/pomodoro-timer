@@ -114,6 +114,17 @@ html, body {
     animation: two 10s infinite;
 }
 
+.bg-interactive {
+    background-color: white;
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    top: 0%;
+    left: 0%;
+
+    opacity: 0.7;
+}
+
 @keyframes one {
     0%{left: 0px; top: 0px}
     25%{left: 0px; top: 70px}
@@ -220,6 +231,7 @@ button:hover {
     font-size: 30px;
 }
 
+/* Slider */
 #slider {
     position: relative;
     width: 50%;
@@ -256,7 +268,6 @@ input[type=radio]:checked {
     transition: transform 400ms ease;
 }
 
-/* Slider */
 /* Selected slides */
 #s1:checked ~ #slide1,
 #s2:checked ~ #slide2,

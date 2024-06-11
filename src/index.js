@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgTeal = document.querySelector('.bg-teal');
     const bgPurple = document.querySelector('.bg-purple');
     const radioBtns = document.querySelectorAll('input[type="radio"]');
+    const interBubble = document.querySelector('.bg-interactive');
 
     let defaultTime = 1;
     let defaultGoal = 1;
@@ -26,6 +27,26 @@ document.addEventListener("DOMContentLoaded", () => {
     let timeLeft = defaultTime * 60;
     let completedTime = 0;
     let isRunning = false;
+    let curX = 0;
+    let curY = 0;
+    let tgX = 0;
+    let tgY = 0;
+
+    function move() {
+        curX += (tgX - curX) / 20;
+        curY += (tgY - curY) / 20;
+        interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
+        requestAnimationFrame(() => {
+            move();
+        });
+    }
+
+    window.addEventListener('mousemove', (event) => {
+        tgX = event.clientX;
+        tgY = event.clientY;
+    });
+
+    move();
 
     // Update timer text when adjusted/reset
     function updateTimerDisplay() {
