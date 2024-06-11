@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const goalInput = document.getElementById("goal-input");
     const completed = document.getElementById("completed");
     const progressCircle = document.getElementById("circle");
+    const containers = document.querySelectorAll('.container');
 
     let defaultTime = 1;
     let defaultGoal = 1;
@@ -75,6 +76,12 @@ document.addEventListener("DOMContentLoaded", () => {
         let sound = new Audio('resources/ringtone.mp3');
         sound.play();
     }
+
+    containers.forEach((container, index) => {
+        container.addEventListener('click', () => {
+            document.getElementById(`s${index + 1}`).checked = true;
+        });
+    });
 
     function editGoal() {
         goalNum.style.display = 'none';
