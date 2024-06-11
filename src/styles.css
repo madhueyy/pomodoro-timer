@@ -5,6 +5,7 @@ html, body {
     margin: 0;
     padding: 0;
     background-color: #20126d;
+    transition: background-color 0.4s ease;
 }
 
 .absolute {
@@ -169,6 +170,7 @@ html, body {
     font-weight: 600;
     margin-right: 10px;
     background: linear-gradient(217deg, #5680E9, #8860D0);
+    box-shadow: 0 5px 5px rgba(0,0,0, 0), 0 2px 2px rgba(0,0,0, 0.2);
     padding: 15px 50px;
     border-radius: 10px;
 }
@@ -212,6 +214,7 @@ button:hover {
     font-weight: 600;
     padding: 8px 16px;
     background: linear-gradient(0.25turn, #5680E9, #5AB9EA);
+    box-shadow: 0 5px 5px rgba(0,0,0, 0), 0 2px 2px rgba(0,0,0, 0.2);
     color: white;
     border-radius: 5px;
     font-size: 30px;
@@ -291,6 +294,7 @@ input[type=radio]:checked {
     border-radius: 5%;
 }
 
+/* Daily goal container */
 #daily-goal {
     font-size: 35px;
     font-weight: 600;
@@ -307,7 +311,7 @@ input[type=radio]:checked {
 #circle {
     width: 200px;
     height: 200px;
-    background: conic-gradient(#8860D0 0% 0%, #e0e0e0 0% 100%);
+    background: conic-gradient(#45af41 0% 0%, #e0e0e0 0% 100%);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -372,4 +376,67 @@ input[type=radio]:checked {
     margin-top: 20px;
     font-size: 17px;
     font-weight: 300;
+}
+
+/* Streaks container */
+#daily-streak {
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+#fire-emoji {
+    width: 175px;
+    height: 175px;
+}
+
+#streak-text {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+/* Settings container */
+#settings {
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+#colour-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#colour-buttons button {
+    font-size: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    width: 125px;
+    height: 100px;
+}
+
+#blue {
+    color: white;
+    background: linear-gradient(0.65turn, #20126d, #8860D0, #5680E9);
+}
+
+#orange {
+    color: white;
+    background: linear-gradient(0.65turn, #fc8253, #bb3838, #f1f07d);
+}
+
+#pink {
+    color: white;
+    background: linear-gradient(-0.65turn, #fdbaba, #bb386e, #ff96e5);
+}
+
+#green {
+    color: white;
+    background: linear-gradient(-0.65turn, #b2fcb8, #319135, #fff454);
+}
+
+lol {
+    background-color: #299459;
 }

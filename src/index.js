@@ -11,6 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const completed = document.getElementById("completed");
     const progressCircle = document.getElementById("circle");
     const containers = document.querySelectorAll('.container');
+    const blueBtn = document.getElementById('blue');
+    const orangeBtn = document.getElementById('orange');
+    const pinkBtn = document.getElementById('pink');
+    const greenBtn = document.getElementById('green');
+    const bgPrimary = document.querySelector('.bg-primary');
+    const bgTeal = document.querySelector('.bg-teal');
+    const bgPurple = document.querySelector('.bg-purple');
+    const radioBtns = document.querySelectorAll('input[type="radio"]');
 
     let defaultTime = 1;
     let defaultGoal = 1;
@@ -112,6 +120,71 @@ document.addEventListener("DOMContentLoaded", () => {
         goalNum.style.display = 'block';
     }
 
+    // Functions for changing colour themes
+    function toBlue() {
+        document.documentElement.style.backgroundColor = "#20126d";
+
+        bgPrimary.style.backgroundColor = "#5680E9";
+        bgTeal.style.backgroundColor = "#5AB9EA";
+        bgPurple.style.backgroundColor = "#8860D0";
+
+        timerDisplay.style.background = 'linear-gradient(217deg, #5680E9, #8860D0)';
+        startBtn.style.background = 'linear-gradient(0.25turn, #5680E9, #5AB9EA)';
+        resetBtn.style.background = 'linear-gradient(0.25turn, #5680E9, #5AB9EA)';
+        
+        radioBtns.forEach(radioBtn => {
+            radioBtn.style.accentColor = '#8860D0';
+        });
+    }
+
+    function toOrange() {
+        document.documentElement.style.backgroundColor = "#bb3838";
+
+        bgPrimary.style.backgroundColor = "#fc8253";
+        bgTeal.style.backgroundColor = "#f1f07d";
+        bgPurple.style.backgroundColor = "#ff96e5";
+
+        timerDisplay.style.background = 'linear-gradient(217deg, #ff7139, #ff688e)';
+        startBtn.style.background = 'linear-gradient(0.25turn, #fd9a29, #eed04b)';
+        resetBtn.style.background = 'linear-gradient(0.25turn, #fd9a29, #eed04b)';
+        
+        radioBtns.forEach(radioBtn => {
+            radioBtn.style.accentColor = '#ec6b44';
+        });
+    }
+
+    function toPink() {
+        document.documentElement.style.backgroundColor = "#bb386e";
+
+        bgPrimary.style.backgroundColor = "#ff96e5";
+        bgTeal.style.backgroundColor = "#ffffff";
+        bgPurple.style.backgroundColor = "#fdbaba";
+
+        timerDisplay.style.background = 'linear-gradient(217deg, #de3772, #fca2a6)';
+        startBtn.style.background = 'linear-gradient(0.25turn, #fc5d95, #ff96e5)';
+        resetBtn.style.background = 'linear-gradient(0.25turn, #fc5d95, #ff96e5)';
+        
+        radioBtns.forEach(radioBtn => {
+            radioBtn.style.accentColor = '#de3772';
+        });
+    }
+
+    function toGreen() {
+        document.documentElement.style.backgroundColor = "#319135";
+
+        bgPrimary.style.backgroundColor = "#b2fcb8";
+        bgTeal.style.backgroundColor = "#a2cffc";
+        bgPurple.style.backgroundColor = "#ffffff";
+
+        timerDisplay.style.background = 'linear-gradient(217deg, #359455, #60d186)';
+        startBtn.style.background = 'linear-gradient(-0.25turn, #b0ff8a, #3eb344)';
+        resetBtn.style.background = 'linear-gradient(-0.25turn, #b0ff8a, #3eb344)';
+        
+        radioBtns.forEach(radioBtn => {
+            radioBtn.style.accentColor = '#299459';
+        });
+    }
+
     // Increase and decrease timer by 5 mins
     increaseBtn.addEventListener("click", () => adjustTime(5));
     decreaseBtn.addEventListener("click", () => adjustTime(-1));
@@ -120,6 +193,11 @@ document.addEventListener("DOMContentLoaded", () => {
     resetBtn.addEventListener("click", resetTimer);
     // Edit goal
     editBtn.addEventListener("click", editGoal);
+    // Colour theme settings
+    blueBtn.addEventListener("click", toBlue);
+    orangeBtn.addEventListener("click", toOrange);
+    pinkBtn.addEventListener("click", toPink);
+    greenBtn.addEventListener("click", toGreen);
 
     updateTimerDisplay();
 
@@ -141,10 +219,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // If completed total time reaches or goes over goal
         if (completedTime/60 >= defaultGoal) {
-            progressCircle.style.background = "conic-gradient(rgb(108, 0, 162) 0% 100%, #e0e0e0 0% 100%)";
+            progressCircle.style.background = "conic-gradient(#45af41 0% 100%, #e0e0e0 0% 100%)";
         } else {
             completedPercent = completedTime/(defaultGoal*60) * 100;
-            progressCircle.style.background = `conic-gradient(rgb(108, 0, 162) 0% ${completedPercent}%, #e0e0e0 0% 100%)`;
+            progressCircle.style.background = `conic-gradient(#45af41 0% ${completedPercent}%, #e0e0e0 0% 100%)`;
         }
     }
 
