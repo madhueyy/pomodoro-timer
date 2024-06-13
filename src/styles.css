@@ -8,6 +8,12 @@ html, body {
     transition: background-color 0.4s ease;
 }
 
+@media screen and (max-width: 1000px) {
+    .container {
+       margin-bottom: 100px;
+    }
+ }
+
 .absolute {
     position: absolute;
     top: 50px !important;
@@ -125,7 +131,7 @@ html, body {
     opacity: 0.7;
 }
 
-@keyframes one {
+/* @keyframes one {
     0%{left: 0px; top: 0px}
     25%{left: 0px; top: 70px}
     50%{left: 20px; top: 150px}
@@ -139,7 +145,7 @@ html, body {
     50%{left: 100px; top: 50px}
     75%{left: 50px; top: 100px}
     100%{left: 0px; top: 0px}
-}
+} */
 
 .opacity-50 {
     opacity: .5;
@@ -163,7 +169,6 @@ html, body {
 
 .timer-container {
     position: relative;
-    margin-bottom: 50px;
     margin-top: 50px;
     text-align: center;
 }
@@ -173,11 +178,12 @@ html, body {
     flex-direction: row;
     justify-content: center;
     margin-bottom: 30px;
+    margin-left: 20px;
 }
 
 #timer {
     color: white;
-    font-size: 4em;
+    font-size: 5em;
     font-weight: 600;
     margin-right: 10px;
     background: linear-gradient(217deg, #5680E9, #8860D0);
@@ -187,8 +193,11 @@ html, body {
 }
 
 .controls {
+    position: fixed;
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
+    margin-left: 400px;
 }
 
 #up-arrow {
@@ -234,17 +243,17 @@ button:hover {
 /* Slider */
 #slider {
     position: relative;
-    width: 50%;
-    height: 30vw;
-    margin: 80px auto;
     perspective: 1400px;
     transform-style: preserve-3d;
+    justify-content: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 input[type=radio] {
+    margin-top: 450px;
     position: relative;
-    top: 120%;
-    left: 40%;
     width: 18px;
     height: 18px;
     margin-bottom: 15px;

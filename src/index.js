@@ -20,18 +20,44 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgPurple = document.querySelector('.bg-purple');
     const radioBtns = document.querySelectorAll('input[type="radio"]');
     const interBubble = document.querySelector('.bg-interactive');
+    const streakText = document.getElementById("streak-text");
 
-    let defaultTime = 1;
+    let defaultTime = 25;
     let defaultGoal = 1;
     let countdown;
     let timeLeft = defaultTime * 60;
-    let completedTime = 0;
+    let completedTime = localStorage.getItem('completedTime') ? parseInt(localStorage.getItem('completedTime')) : 0;
     let isRunning = false;
     let curX = 0;
     let curY = 0;
     let tgX = 0;
     let tgY = 0;
+    
+    // Streak variables
+    let streak = localStorage.getItem('streak') ? parseInt(localStorage.getItem('streak')) : 0;
+    let lastCompletedDate = localStorage.getItem('lastCompletedDate') ? new Date(localStorage.getItem('lastCompletedDate')) : new Date();
+    // Daily goal variables
+    let goalCompleted = localStorage.getItem('goalCompleted') ? localStorage.getItem('goalCompleted') : false;
+    let completedPercent = localStorage.getItem('completedPercent') ? parseFloat(localStorage.getItem('completedPercent')) : 0;
+    let lastVisitedDate = localStorage.getItem('lastVisitedDate') ? new Date(localStorage.getItem('lastVisitedDate')) : new Date();
 
+    // Initialise streak text
+    streakText.textContent = `${streak} Day(s)`;
+
+    // Set initial completed time text
+    if (completedTime % 60 === 0) {
+        completed.textContent = "Completed: " + completedTime / 60 + " hour(s)";
+    } else if (completedTime > 60) {
+        completed.textContent = "Completed: " + Math.floor(completedTime / 60) + " hour(s)" 
+        + completedTime % 60 + " mins";
+    } else {
+        completed.textContent = "Completed: " + completedTime + " mins";
+    }
+
+    // Set initial progress circle
+    progressCircle.style.background = `conic-gradient(#45af41 0% ${completedPercent}%, #e0e0e0 0% 100%)`;
+
+    // For background
     function move() {
         curX += (tgX - curX) / 20;
         curY += (tgY - curY) / 20;
@@ -48,6 +74,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     move();
 
+    // Function to check if the date has changed and reset if it is
+    function checkNewDay() {
+        const today = new Date();
+        const lastDate = new Date(lastVisitedDate);
+
+        if (today.toDateString() !== lastDate.toDateString()) {
+            // Reset completed time and percentage
+            completedTime = 0;
+            completedPercent = 0;
+            progressCircle.style.background = `conic-gradient(#45af41 0% ${completedPercent}%, #e0e0e0 0% 100%)`;
+            goalCompleted = false;
+            localStorage.setItem('goalCompleted', goalCompleted);
+            localStorage.setItem('completedTime', completedTime);
+            localStorage.setItem('completedPercent', completedPercent);
+
+            // Update the completed text
+            completed.textContent = "Completed: 0 mins";
+
+            // Update the last visited date
+            lastVisitedDate = today;
+            localStorage.setItem('lastVisitedDate', today.toDateString());
+        }
+    }
+
+    // Call checkNewDay on page load
+    checkNewDay();
+
     // Update timer text when adjusted/reset
     function updateTimerDisplay() {
         const minutes = Math.floor(timeLeft / 60);
@@ -55,33 +108,47 @@ document.addEventListener("DOMContentLoaded", () => {
         timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     }
 
-    function stopTimer() {
-        clearInterval(countdown);
-        isRunning = false;
-        startBtn.textContent = "START";
+    function tick() {
+        const now = Date.now();
+        const elapsedTime = Math.floor((now - startTime) / 1000);
+        timeLeft = remainingTime - elapsedTime;
+
+        if (timeLeft <= 0) {
+            clearTimeout(countdown);
+            isRunning = false;
+            startBtn.textContent = "START";
+            timeLeft = 0;
+
+            updateTimerDisplay();
+            playSound();
+            updateDaily(defaultTime);
+            resetTimer();
+        } else {
+            updateTimerDisplay();
+            countdown = setTimeout(tick, 1000);
+        }
     }
 
     function startTimer() {
         if (isRunning) {
-            stopTimer();
+            clearTimeout(countdown);
+            isRunning = false;
+            startBtn.textContent = "START";
         } else {
             startBtn.textContent = "STOP";
             isRunning = true;
-
-            countdown = setInterval(() => {
-                timeLeft--;
-                updateTimerDisplay();
-
-                if (timeLeft <= 0) {
-                    clearInterval(countdown);
-                    isRunning = false;
-                    startBtn.textContent = "START";
-                    alert("Time completed!");
-                    updateDaily(defaultTime);
-                    resetTimer();
-                }
-            }, 1000);
+            startTime = Date.now();
+            remainingTime = timeLeft;
+            tick();
         }
+    }
+
+    function resetTimer() {
+        clearTimeout(countdown);
+        timeLeft = defaultTime * 60;
+        updateTimerDisplay();
+        isRunning = false;
+        startBtn.textContent = "START";
     }
 
     function resetTimer() {
@@ -225,6 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update daily goal after countdown completes
     function updateDaily(defaultTime) {
         completedTime += defaultTime;
+        localStorage.setItem('completedTime', completedTime);
 
         // If time is in hours
         if (completedTime % 60 === 0) {
@@ -238,14 +306,46 @@ document.addEventListener("DOMContentLoaded", () => {
             completed.textContent = "Completed: " + completedTime + " mins";
         }
 
-        // If completed total time reaches or goes over goal
-        if (completedTime/60 >= defaultGoal) {
-            progressCircle.style.background = "conic-gradient(#45af41 0% 100%, #e0e0e0 0% 100%)";
-        } else {
-            completedPercent = completedTime/(defaultGoal*60) * 100;
-            progressCircle.style.background = `conic-gradient(#45af41 0% ${completedPercent}%, #e0e0e0 0% 100%)`;
+        // For when the daily goal has already been met
+        if (goalCompleted === false) {
+            goalCompleted = true;
+            localStorage.setItem('goalCompleted', goalCompleted);
+            // If completed total time reaches or goes over goal
+            if (completedTime / 60 >= defaultGoal) {
+                completedPercent = 100;
+                progressCircle.style.background = "conic-gradient(#45af41 0% 100%, #e0e0e0 0% 100%)";
+                updateStreak();
+            } else {
+                completedPercent = completedTime/(defaultGoal*60) * 100;
+                progressCircle.style.background = `conic-gradient(#45af41 0% ${completedPercent}%, #e0e0e0 0% 100%)`;
+            }
         }
+
+        localStorage.setItem('completedPercent', completedPercent);
     }
 
+    // Update the streak
+    function updateStreak() {
+        const today = new Date();
+        const lastDate = new Date(lastCompletedDate);
 
+        // Check if the goal was completed on a new day
+        if (today.toDateString() !== lastDate.toDateString()) {
+            // Check if it's a consecutive day
+            if ((today - lastDate) / (1000 * 60 * 60 * 24) === 1) {
+                streak++;
+            // Reset streak if not consecutive
+            } else {
+                streak = 0;
+            }
+        } else {
+            streak++;
+        }
+
+        lastCompletedDate = today;
+        localStorage.setItem('streak', streak);
+        localStorage.setItem('lastCompletedDate', today.toDateString());
+
+        streakText.textContent = `${streak} Day(s)`;
+    }
 });
