@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function checkNewDay() {
         const today = new Date();
         const lastDate = new Date(lastVisitedDate);
+        updateStreak();
 
         if (today.toDateString() !== lastDate.toDateString()) {
             // Reset completed time and percentage
@@ -93,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
             completed.textContent = "Completed: 0 mins";
 
             // Update the last visited date
-            lastVisitedDate = today;
             localStorage.setItem('lastVisitedDate', today.toDateString());
         }
     }
@@ -275,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Increase and decrease timer by 5 mins
     increaseBtn.addEventListener("click", () => adjustTime(5));
-    decreaseBtn.addEventListener("click", () => adjustTime(-1));
+    decreaseBtn.addEventListener("click", () => adjustTime(-5));
     // Start and reset timer
     startBtn.addEventListener("click", startTimer);
     resetBtn.addEventListener("click", resetTimer);
@@ -314,6 +314,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (completedTime / 60 >= defaultGoal) {
                 completedPercent = 100;
                 progressCircle.style.background = "conic-gradient(#45af41 0% 100%, #e0e0e0 0% 100%)";
+                lastCompletedDate = new Date();
+                localStorage.setItem('lastCompletedDate', lastCompletedDate);
                 updateStreak();
             } else {
                 completedPercent = completedTime/(defaultGoal*60) * 100;
@@ -327,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update the streak
     function updateStreak() {
         const today = new Date();
-        const lastDate = new Date(lastCompletedDate);
+        const lastDate = lastCompletedDate;
 
         // Check if the goal was completed on a new day
         if (today.toDateString() !== lastDate.toDateString()) {
@@ -338,8 +340,6 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 streak = 0;
             }
-        } else {
-            streak++;
         }
 
         lastCompletedDate = today;
