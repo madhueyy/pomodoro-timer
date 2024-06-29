@@ -188,11 +188,9 @@ html, body {
 }
 
 .controls {
-    position: fixed;
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-    margin-left: 400px;
 }
 
 #up-arrow {
@@ -450,8 +448,4 @@ input[type=radio]:checked {
 #green {
     color: white;
     background: linear-gradient(-0.65turn, #b2fcb8, #319135, #fff454);
-}
-
-lol {
-    background-color: #299459;
 }
